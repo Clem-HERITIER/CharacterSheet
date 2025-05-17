@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wfrp.Domain.Entities
+﻿namespace Wfrp.Domain.Entities
 {
     public class CareerLevel
     {
         public Guid Id { get; set; }
+
+        public int Level { get; set; } // 1 à 4
         public string Title { get; set; } = string.Empty;
-        public int Level { get; set; }
+
         public Guid CareerId { get; set; }
         public Career Career { get; set; }
 
-        public List<CharacteristicType> CanAdvanceCharacteristics { get; set; } = new();
-    }
+        public StatusTier StatusTier { get; set; }
+        public int StatusLevel { get; set; }
 
+        public List<CharacteristicType> CanAdvanceCharacteristics { get; set; } = new();
+
+        public List<CareerLevelSkill> Skills { get; set; } = new();
+        public List<CareerLevelTalent> Talents { get; set; } = new();
+    }
 }

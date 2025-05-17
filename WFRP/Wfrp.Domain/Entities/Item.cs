@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wfrp.Domain.Entities
+﻿namespace Wfrp.Domain.Entities
 {
-    public class Item
+    public abstract class Item
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Type { get; set; } = string.Empty; // Weapon, Tool, Armor, etc.
         public string Description { get; set; } = string.Empty;
+
+        public double Weight { get; set; } = 0;
+        public int Value { get; set; } = 0; 
     }
 }

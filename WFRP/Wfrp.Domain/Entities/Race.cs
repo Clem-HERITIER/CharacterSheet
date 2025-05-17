@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wfrp.Domain.Entities
+﻿namespace Wfrp.Domain.Entities
 {
     public class Race
     {
@@ -18,6 +12,7 @@ namespace Wfrp.Domain.Entities
         public int ResiliencePoints { get; set; }
         public int ExtraPoints { get; set; }
 
-        public List<Character> Characters { get; set; } = new();
+        public List<RaceSkill> StartingSkills { get; set; } = new();
+        public List<RaceTalent> StartingTalents { get; set; } = new();
     }
 }
