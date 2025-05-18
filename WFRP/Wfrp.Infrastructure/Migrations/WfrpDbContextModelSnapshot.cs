@@ -54,7 +54,7 @@ namespace Wfrp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CareerClass");
+                    b.ToTable("CareerClasses");
                 });
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevel", b =>
@@ -73,6 +73,12 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("integer");
 
+                    b.Property<int>("StatusLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StatusTier")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -84,16 +90,90 @@ namespace Wfrp.Infrastructure.Migrations
                     b.ToTable("CareerLevels");
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevelSkill", b =>
+                {
+                    b.Property<Guid>("CareerLevelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SkillId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("CareerLevelId", "SkillId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("CareerLevelSkill");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevelTalent", b =>
+                {
+                    b.Property<Guid>("CareerLevelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TalentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsOptional")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("CareerLevelId", "TalentId");
+
+                    b.HasIndex("TalentId");
+
+                    b.ToTable("CareerLevelTalent");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Character", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CareerLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("CurrentCareerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ExperienceSpent")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ExperienceTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("EyeColor")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("FatePoints")
                         .HasColumnType("integer");
 
+                    b.Property<string>("HairColor")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("LongTermAmbition")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Psychology")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -103,7 +183,16 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<int>("ResiliencePoints")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ShortTermAmbition")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Wounds")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CurrentCareerId");
 
                     b.HasIndex("RaceId");
 
@@ -125,7 +214,7 @@ namespace Wfrp.Infrastructure.Migrations
 
                     b.HasIndex("CareerId");
 
-                    b.ToTable("CharacterCareers");
+                    b.ToTable("CharacterCareer");
                 });
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterItem", b =>
@@ -146,7 +235,7 @@ namespace Wfrp.Infrastructure.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("CharacterItems");
+                    b.ToTable("CharacterItem");
                 });
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterSkill", b =>
@@ -167,7 +256,7 @@ namespace Wfrp.Infrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("CharacterSkills");
+                    b.ToTable("CharacterSkill");
                 });
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterTalent", b =>
@@ -181,11 +270,14 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<int>("AcquiredAtLevel")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Rank")
+                        .HasColumnType("integer");
+
                     b.HasKey("CharacterId", "TalentId");
 
                     b.HasIndex("TalentId");
 
-                    b.ToTable("CharacterTalents");
+                    b.ToTable("CharacterTalent");
                 });
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Item", b =>
@@ -198,7 +290,7 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("ItemType")
                         .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
@@ -207,15 +299,17 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Value")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
                     b.ToTable("Items");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Item");
+                    b.HasDiscriminator<string>("ItemType").HasValue("Item");
 
                     b.UseTphMappingStrategy();
                 });
@@ -247,14 +341,62 @@ namespace Wfrp.Infrastructure.Migrations
                     b.ToTable("Races");
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.RaceSkill", b =>
+                {
+                    b.Property<Guid>("RaceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SkillId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("InitialLevel")
+                        .HasColumnType("integer");
+
+                    b.HasKey("RaceId", "SkillId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("RaceSkill");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.RaceTalent", b =>
+                {
+                    b.Property<Guid>("RaceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TalentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsOptional")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("RaceId", "TalentId");
+
+                    b.HasIndex("TalentId");
+
+                    b.ToTable("RaceTalent");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Skill", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Characteristic")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsAdvanced")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Specialization")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -267,6 +409,12 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("CanBeRanked")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -284,7 +432,15 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<int>("ArmorPoints")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Flaws")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Qualities")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -294,6 +450,9 @@ namespace Wfrp.Infrastructure.Migrations
             modelBuilder.Entity("Wfrp.Domain.Entities.Gear", b =>
                 {
                     b.HasBaseType("Wfrp.Domain.Entities.Item");
+
+                    b.Property<string>("Effect")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsConsumable")
                         .HasColumnType("boolean");
@@ -305,8 +464,9 @@ namespace Wfrp.Infrastructure.Migrations
                 {
                     b.HasBaseType("Wfrp.Domain.Entities.Item");
 
-                    b.Property<int>("Damage")
-                        .HasColumnType("integer");
+                    b.Property<string>("Damage")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Flaws")
                         .IsRequired()
@@ -319,6 +479,19 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<string>("Reach")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("WeaponType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("Items", t =>
+                        {
+                            t.Property("Flaws")
+                                .HasColumnName("Weapon_Flaws");
+
+                            t.Property("Qualities")
+                                .HasColumnName("Weapon_Qualities");
+                        });
 
                     b.HasDiscriminator().HasValue("Weapon");
                 });
@@ -345,10 +518,52 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Navigation("Career");
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevelSkill", b =>
+                {
+                    b.HasOne("Wfrp.Domain.Entities.CareerLevel", "CareerLevel")
+                        .WithMany("Skills")
+                        .HasForeignKey("CareerLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wfrp.Domain.Entities.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CareerLevel");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevelTalent", b =>
+                {
+                    b.HasOne("Wfrp.Domain.Entities.CareerLevel", "CareerLevel")
+                        .WithMany("Talents")
+                        .HasForeignKey("CareerLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wfrp.Domain.Entities.Talent", "Talent")
+                        .WithMany()
+                        .HasForeignKey("TalentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CareerLevel");
+
+                    b.Navigation("Talent");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Character", b =>
                 {
+                    b.HasOne("Wfrp.Domain.Entities.Career", "CurrentCareer")
+                        .WithMany()
+                        .HasForeignKey("CurrentCareerId");
+
                     b.HasOne("Wfrp.Domain.Entities.Race", "Race")
-                        .WithMany("Characters")
+                        .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -442,6 +657,8 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Navigation("AdvancesCharacteristics")
                         .IsRequired();
 
+                    b.Navigation("CurrentCareer");
+
                     b.Navigation("InitialCharacteristics")
                         .IsRequired();
 
@@ -457,7 +674,7 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Wfrp.Domain.Entities.Character", "Character")
-                        .WithMany("Careers")
+                        .WithMany("CareerHistory")
                         .HasForeignKey("CharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -573,6 +790,44 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.RaceSkill", b =>
+                {
+                    b.HasOne("Wfrp.Domain.Entities.Race", "Race")
+                        .WithMany("StartingSkills")
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wfrp.Domain.Entities.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Race");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.RaceTalent", b =>
+                {
+                    b.HasOne("Wfrp.Domain.Entities.Race", "Race")
+                        .WithMany("StartingTalents")
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wfrp.Domain.Entities.Talent", "Talent")
+                        .WithMany()
+                        .HasForeignKey("TalentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Race");
+
+                    b.Navigation("Talent");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Career", b =>
                 {
                     b.Navigation("Levels");
@@ -583,9 +838,16 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Navigation("Careers");
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevel", b =>
+                {
+                    b.Navigation("Skills");
+
+                    b.Navigation("Talents");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Character", b =>
                 {
-                    b.Navigation("Careers");
+                    b.Navigation("CareerHistory");
 
                     b.Navigation("Inventory");
 
@@ -596,7 +858,9 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Race", b =>
                 {
-                    b.Navigation("Characters");
+                    b.Navigation("StartingSkills");
+
+                    b.Navigation("StartingTalents");
                 });
 #pragma warning restore 612, 618
         }
