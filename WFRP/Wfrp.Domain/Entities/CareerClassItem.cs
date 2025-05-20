@@ -1,9 +1,9 @@
 ﻿namespace Wfrp.Domain.Entities
 {
-    public class CharacterItem
+    public class CareerClassItem
     {
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
+        public int CareerClassId { get; set; }
+        public CareerClass CareerClass { get; set; }
 
         public int ItemId { get; set; }
         public Item Item { get; set; }

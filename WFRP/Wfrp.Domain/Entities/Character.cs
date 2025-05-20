@@ -4,7 +4,7 @@ namespace Wfrp.Domain.Entities
 {
     public class Character
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public int Age { get; set; }
         public int Height { get; set; } // in cm
@@ -18,7 +18,7 @@ namespace Wfrp.Domain.Entities
         public string LongTermAmbition { get; set; } = string.Empty;
         public string Psychology { get; set; } = string.Empty;
 
-        public Guid RaceId { get; set; }
+        public int RaceId { get; set; }
         public Race Race { get; set; }
 
         [NotMapped]
@@ -30,7 +30,7 @@ namespace Wfrp.Domain.Entities
         [NotMapped]
         public Characteristics CurrentCharacteristics { get; set; } = new();
 
-        public Guid? CurrentCareerId { get; set; } 
+        public int? CurrentCareerId { get; set; } 
         public Career? CurrentCareer { get; set; }
         public int CareerLevel { get; set; } // Level 1 to 4
 

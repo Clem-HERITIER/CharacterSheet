@@ -2,9 +2,10 @@
 {
     public class Talent
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
+        public string MaximumLevel { get; set; } = string.Empty;
+        public string TestType { get; set; } = string.Empty;
         public string? Description { get; set; }
         public bool CanBeRanked { get; set; } = false;
     }

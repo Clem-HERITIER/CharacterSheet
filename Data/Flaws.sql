@@ -1,0 +1,8 @@
+-- Flaws
+INSERT INTO "Flaws" ("Name", "Description") VALUES
+('Dangereuse', 'Certaines armes sont presque aussi susceptibles de vous blesser que votre adversaire. Tout Test raté incluant un 9 sur le dé des dizaines ou des unités entraîne une Maladresse (voir Chapitre 5 : Règles pour plus d’informations sur les Maladresses).'),
+('Épuisante', 'L’arme est fatigante à utiliser ou il est difficile de viser avec. Vous ne gagnez les bénéfices des Traits d’arme Percutante et Dévastatrice que lors d’un Tour où vous Chargez.'),
+('Imprécise', 'Les armes Imprécises sont difficiles à manier car elles sont lourdes ou bien il est difficile de viser avec. Subissez une pénalité de -1 DR quand vous utilisez l’arme pour attaquer. Une arme Imprécise ne peut jamais être également Précise (Imprécise prend le dessus).'),
+('Inoffensive', 'Certaines armes ne sont pas très efficaces pour pénétrer les armures. Tous les PA sont doublés contre les armes Inoffensives. De plus, vous n’infligez pas automatiquement le minimum de 1 Blessure sur une touche réussie en combat.'),
+('Lente', 'Les armes Lentes sont lourdes et massives, les rendant difficiles à utiliser correctement. Les Personnages utilisant des armes Lentes frappent toujours en dernier lors d’un Round, sans tenir compte de l’ordre d’Initiative. De plus, les adversaires gagnent un bonus de +1 DR à tout Test pour se défendre contre vos attaques.'),
+('Recharge (Indice)', 'L’arme est longue à recharger. Une arme déchargée possédant ce défaut nécessite un Test étendu de Projectiles approprié au Groupe d’armes correspondant et nécessite également d’obtenir Indice DR pour être rechargée. Si vous êtes interrompu pendant que vous rechargez, vous devez recommencer à zéro.')

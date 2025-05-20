@@ -2,10 +2,10 @@
 {
     public class CharacterTalent
     {
-        public Guid CharacterId { get; set; }
+        public int CharacterId { get; set; }
         public Character Character { get; set; }
 
-        public Guid TalentId { get; set; }
+        public int TalentId { get; set; }
         public Talent Talent { get; set; }
 
         public int Rank { get; set; } = 1;

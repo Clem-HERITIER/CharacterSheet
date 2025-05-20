@@ -12,8 +12,8 @@ using Wfrp.Infrastructure.Data;
 namespace Wfrp.Infrastructure.Migrations
 {
     [DbContext(typeof(WfrpDbContext))]
-    [Migration("20250518001617_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250518192154_UpdateSkills")]
+    partial class UpdateSkills
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,12 +27,14 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Career", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("CareerClassId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CareerClassId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -47,9 +49,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CareerClass", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -62,16 +66,18 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevel", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CanAdvanceCharacteristics")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CareerId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CareerId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Level")
                         .HasColumnType("integer");
@@ -95,11 +101,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevelSkill", b =>
                 {
-                    b.Property<Guid>("CareerLevelId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CareerLevelId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("SkillId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("SkillId")
+                        .HasColumnType("integer");
 
                     b.HasKey("CareerLevelId", "SkillId");
 
@@ -110,11 +116,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CareerLevelTalent", b =>
                 {
-                    b.Property<Guid>("CareerLevelId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CareerLevelId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("TalentId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("TalentId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("integer");
@@ -131,9 +137,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Character", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
                         .HasColumnType("integer");
@@ -141,8 +149,8 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<int>("CareerLevel")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("CurrentCareerId")
-                        .HasColumnType("uuid");
+                    b.Property<int?>("CurrentCareerId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -180,8 +188,8 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("RaceId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("ResiliencePoints")
                         .HasColumnType("integer");
@@ -204,11 +212,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterCareer", b =>
                 {
-                    b.Property<Guid>("CharacterId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("CareerId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CareerId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Level")
                         .HasColumnType("integer");
@@ -222,11 +230,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterItem", b =>
                 {
-                    b.Property<Guid>("CharacterId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("ItemId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("ItemId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Notes")
                         .HasColumnType("text");
@@ -243,11 +251,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterSkill", b =>
                 {
-                    b.Property<Guid>("CharacterId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("SkillId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("SkillId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("AcquiredAtLevel")
                         .HasColumnType("integer");
@@ -264,11 +272,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.CharacterTalent", b =>
                 {
-                    b.Property<Guid>("CharacterId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("TalentId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("TalentId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("AcquiredAtLevel")
                         .HasColumnType("integer");
@@ -283,15 +291,37 @@ namespace Wfrp.Infrastructure.Migrations
                     b.ToTable("CharacterTalent");
                 });
 
-            modelBuilder.Entity("Wfrp.Domain.Entities.Item", b =>
+            modelBuilder.Entity("Wfrp.Domain.Entities.Flaw", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Flaws");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Availability")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ItemType")
                         .IsRequired()
@@ -302,8 +332,9 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("integer");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<double>("Weight")
                         .HasColumnType("double precision");
@@ -317,11 +348,43 @@ namespace Wfrp.Infrastructure.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.ItemFlaw", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FlawId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ItemId", "FlawId");
+
+                    b.HasIndex("FlawId");
+
+                    b.ToTable("ItemFlaws");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.ItemQuality", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QualityId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ItemId", "QualityId");
+
+                    b.HasIndex("QualityId");
+
+                    b.ToTable("ItemQualities");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Race", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ExtraPoints")
                         .HasColumnType("integer");
@@ -346,11 +409,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.RaceSkill", b =>
                 {
-                    b.Property<Guid>("RaceId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("SkillId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("SkillId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("InitialLevel")
                         .HasColumnType("integer");
@@ -364,11 +427,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.RaceTalent", b =>
                 {
-                    b.Property<Guid>("RaceId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("TalentId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("TalentId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("integer");
@@ -385,18 +448,30 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Skill", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Characteristic")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsAdvanced")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsGrouped")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShortDescription")
                         .HasColumnType("text");
 
                     b.Property<string>("Specialization")
@@ -409,9 +484,11 @@ namespace Wfrp.Infrastructure.Migrations
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Talent", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("CanBeRanked")
                         .HasColumnType("boolean");
@@ -428,6 +505,27 @@ namespace Wfrp.Infrastructure.Migrations
                     b.ToTable("Talents");
                 });
 
+            modelBuilder.Entity("Wfrp.Shared.Enums.Quality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Qualities");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Armor", b =>
                 {
                     b.HasBaseType("Wfrp.Domain.Entities.Item");
@@ -435,15 +533,7 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<int>("ArmorPoints")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Flaws")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Qualities")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -453,6 +543,10 @@ namespace Wfrp.Infrastructure.Migrations
             modelBuilder.Entity("Wfrp.Domain.Entities.Gear", b =>
                 {
                     b.HasBaseType("Wfrp.Domain.Entities.Item");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Effect")
                         .HasColumnType("text");
@@ -471,30 +565,11 @@ namespace Wfrp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Flaws")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Reach")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Qualities")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Reach")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("WeaponType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.ToTable("Items", t =>
-                        {
-                            t.Property("Flaws")
-                                .HasColumnName("Weapon_Flaws");
-
-                            t.Property("Qualities")
-                                .HasColumnName("Weapon_Qualities");
-                        });
+                    b.Property<int>("WeaponType")
+                        .HasColumnType("integer");
 
                     b.HasDiscriminator().HasValue("Weapon");
                 });
@@ -573,8 +648,8 @@ namespace Wfrp.Infrastructure.Migrations
 
                     b.OwnsOne("Wfrp.Domain.Entities.Characteristics", "AdvancesCharacteristics", b1 =>
                         {
-                            b1.Property<Guid>("CharacterId")
-                                .HasColumnType("uuid");
+                            b1.Property<int>("CharacterId")
+                                .HasColumnType("integer");
 
                             b1.Property<int>("Agility")
                                 .HasColumnType("integer");
@@ -616,8 +691,8 @@ namespace Wfrp.Infrastructure.Migrations
 
                     b.OwnsOne("Wfrp.Domain.Entities.Characteristics", "InitialCharacteristics", b1 =>
                         {
-                            b1.Property<Guid>("CharacterId")
-                                .HasColumnType("uuid");
+                            b1.Property<int>("CharacterId")
+                                .HasColumnType("integer");
 
                             b1.Property<int>("Agility")
                                 .HasColumnType("integer");
@@ -744,12 +819,50 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Navigation("Talent");
                 });
 
+            modelBuilder.Entity("Wfrp.Domain.Entities.ItemFlaw", b =>
+                {
+                    b.HasOne("Wfrp.Domain.Entities.Flaw", "Flaw")
+                        .WithMany()
+                        .HasForeignKey("FlawId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wfrp.Domain.Entities.Item", "Item")
+                        .WithMany("Flaws")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flaw");
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.ItemQuality", b =>
+                {
+                    b.HasOne("Wfrp.Domain.Entities.Item", "Item")
+                        .WithMany("Qualities")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wfrp.Shared.Enums.Quality", "Quality")
+                        .WithMany()
+                        .HasForeignKey("QualityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Quality");
+                });
+
             modelBuilder.Entity("Wfrp.Domain.Entities.Race", b =>
                 {
                     b.OwnsOne("Wfrp.Domain.Entities.Characteristics", "BaseCharacteristics", b1 =>
                         {
-                            b1.Property<Guid>("RaceId")
-                                .HasColumnType("uuid");
+                            b1.Property<int>("RaceId")
+                                .HasColumnType("integer");
 
                             b1.Property<int>("Agility")
                                 .HasColumnType("integer");
@@ -857,6 +970,13 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Navigation("Skills");
 
                     b.Navigation("Talents");
+                });
+
+            modelBuilder.Entity("Wfrp.Domain.Entities.Item", b =>
+                {
+                    b.Navigation("Flaws");
+
+                    b.Navigation("Qualities");
                 });
 
             modelBuilder.Entity("Wfrp.Domain.Entities.Race", b =>

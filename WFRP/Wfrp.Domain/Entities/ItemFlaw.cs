@@ -1,9 +1,9 @@
 ﻿namespace Wfrp.Domain.Entities
 {
-    public class WeaponFlaw
+    public class ItemFlaw
     {
-        public int WeaponId { get; set; }
-        public Weapon Weapon { get; set; } = null!;
+        public int ItemId { get; set; }
+        public Item Item { get; set; } = null!;
 
         public int FlawId { get; set; }
         public Flaw Flaw { get; set; } = null!;

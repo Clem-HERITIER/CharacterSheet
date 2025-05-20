@@ -2,10 +2,10 @@
 {
     public class RaceSkill
     {
-        public Guid RaceId { get; set; }
+        public int RaceId { get; set; }
         public Race Race { get; set; }
 
-        public Guid SkillId { get; set; }
+        public int SkillId { get; set; }
         public Skill Skill { get; set; }
 
         public int InitialLevel { get; set; } = 0;

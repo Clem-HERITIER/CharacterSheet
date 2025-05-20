@@ -2,12 +2,12 @@
 {
     public class CareerLevel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public int Level { get; set; } // 1 to 4
         public string Title { get; set; } = string.Empty;
 
-        public Guid CareerId { get; set; }
+        public int CareerId { get; set; }
         public Career Career { get; set; }
 
         public StatusTier StatusTier { get; set; }

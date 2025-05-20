@@ -20,8 +20,8 @@ namespace Wfrp.Infrastructure.Data
         public DbSet<Weapon> Weapons => Set<Weapon>();
         public DbSet<Quality> Qualities => Set<Quality>();
         public DbSet<Flaw> Flaws => Set<Flaw>();
-        public DbSet<WeaponQuality> WeaponQualities => Set<WeaponQuality>();
-        public DbSet<WeaponFlaw> WeaponFlaws => Set<WeaponFlaw>();
+        public DbSet<ItemQuality> ItemQualities => Set<ItemQuality>();
+        public DbSet<ItemFlaw> ItemFlaws => Set<ItemFlaw>();
         public DbSet<Armor> Armors => Set<Armor>();
         public DbSet<Gear> Gears => Set<Gear>();
 
@@ -32,14 +32,14 @@ namespace Wfrp.Infrastructure.Data
             modelBuilder.Entity<Character>().OwnsOne(c => c.AdvancesCharacteristics);
 
             // Composite keys for join tables
-            modelBuilder.Entity<CharacterSkill>().HasKey(cs => new { cs.CharacterId, cs.SkillId });
-            modelBuilder.Entity<CharacterTalent>().HasKey(ct => new { ct.CharacterId, ct.TalentId });
-            modelBuilder.Entity<CharacterItem>().HasKey(ci => new { ci.CharacterId, ci.ItemId });
-            modelBuilder.Entity<CharacterCareer>().HasKey(cc => new { cc.CharacterId, cc.CareerId });
-            modelBuilder.Entity<RaceSkill>().HasKey(rs => new { rs.RaceId, rs.SkillId });
-            modelBuilder.Entity<RaceTalent>().HasKey(rt => new { rt.RaceId, rt.TalentId });
-            modelBuilder.Entity<CareerLevelSkill>().HasKey(cls => new { cls.CareerLevelId, cls.SkillId });
-            modelBuilder.Entity<CareerLevelTalent>().HasKey(clt => new { clt.CareerLevelId, clt.TalentId });
+            modelBuilder.Entity<CharacterSkill>().HasKey(characterSkill => new { characterSkill.CharacterId, characterSkill.SkillId });
+            modelBuilder.Entity<CharacterTalent>().HasKey(characterTalent => new { characterTalent.CharacterId, characterTalent.TalentId });
+            modelBuilder.Entity<CharacterItem>().HasKey(characterItem => new { characterItem.CharacterId, characterItem.ItemId });
+            modelBuilder.Entity<CharacterCareer>().HasKey(characterCareer => new { characterCareer.CharacterId, characterCareer.CareerId });
+            modelBuilder.Entity<RaceSkill>().HasKey(raceSkill => new { raceSkill.RaceId, raceSkill.SkillId });
+            modelBuilder.Entity<RaceTalent>().HasKey(raceTalent => new { raceTalent.RaceId, raceTalent.TalentId });
+            modelBuilder.Entity<CareerLevelSkill>().HasKey(careerLevelSkill => new { careerLevelSkill.CareerLevelId, careerLevelSkill.SkillId });
+            modelBuilder.Entity<CareerLevelTalent>().HasKey(careerLevelTalent => new { careerLevelTalent.CareerLevelId, careerLevelTalent.TalentId });
 
             // Item inheritance
             modelBuilder.Entity<Item>()
@@ -50,7 +50,7 @@ namespace Wfrp.Infrastructure.Data
 
             // Value conversion for CanAdvanceCharacteristics (List<CharacteristicType>)
             modelBuilder.Entity<CareerLevel>()
-                .Property(cl => cl.CanAdvanceCharacteristics)
+                .Property(careerLevel => careerLevel.CanAdvanceCharacteristics)
                 .HasConversion(
                     v => string.Join(',', v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(e => Enum.Parse<CharacteristicType>(e)).ToList()
@@ -62,33 +62,33 @@ namespace Wfrp.Infrastructure.Data
                         c => c.ToList()
                     ));
 
-            // WeaponQuality configuration
-            modelBuilder.Entity<WeaponQuality>()
-                .HasKey(wq => new { wq.WeaponId, wq.QualityId });
+            // ItemQuality configuration
+            modelBuilder.Entity<ItemQuality>()
+                .HasKey(itemQuality => new { itemQuality.ItemId, itemQuality.QualityId });
 
-            modelBuilder.Entity<WeaponQuality>()
-                .HasOne(wq => wq.Weapon)
-                .WithMany(w => w.Qualities)
-                .HasForeignKey(wq => wq.WeaponId);
+            modelBuilder.Entity<ItemQuality>()
+                .HasOne(itemQuality => itemQuality.Item)
+                .WithMany(item => item.Qualities)
+                .HasForeignKey(itemQuality => itemQuality.ItemId);
 
-            modelBuilder.Entity<WeaponQuality>()
-                .HasOne(wq => wq.Quality)
+            modelBuilder.Entity<ItemQuality>()
+                .HasOne(itemQuality => itemQuality.Quality)
                 .WithMany()
-                .HasForeignKey(wq => wq.QualityId);
+                .HasForeignKey(itemQuality => itemQuality.QualityId);
 
-            // WeaponFlaw configuration
-            modelBuilder.Entity<WeaponFlaw>()
-                .HasKey(wf => new { wf.WeaponId, wf.FlawId });
+            // ItemFlaw configuration
+            modelBuilder.Entity<ItemFlaw>()
+                .HasKey(itemFlow => new { itemFlow.ItemId, itemFlow.FlawId });
 
-            modelBuilder.Entity<WeaponFlaw>()
-                .HasOne(wf => wf.Weapon)
-                .WithMany(w => w.Flaws)
-                .HasForeignKey(wf => wf.WeaponId);
+            modelBuilder.Entity<ItemFlaw>()
+                .HasOne(itemFlow => itemFlow.Item)
+                .WithMany(item => item.Flaws)
+                .HasForeignKey(itemFlow => itemFlow.ItemId);
 
-            modelBuilder.Entity<WeaponFlaw>()
-                .HasOne(wf => wf.Flaw)
+            modelBuilder.Entity<ItemFlaw>()
+                .HasOne(itemFlow => itemFlow.Flaw)
                 .WithMany()
-                .HasForeignKey(wf => wf.FlawId);
+                .HasForeignKey(itemFlow => itemFlow.FlawId);
         }
     }
 }

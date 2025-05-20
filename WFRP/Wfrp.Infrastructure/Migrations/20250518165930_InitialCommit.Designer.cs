@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Wfrp.Infrastructure.Data;
@@ -11,9 +12,11 @@ using Wfrp.Infrastructure.Data;
 namespace Wfrp.Infrastructure.Migrations
 {
     [DbContext(typeof(WfrpDbContext))]
-    partial class WfrpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250518165930_InitialCommit")]
+    partial class InitialCommit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -461,14 +464,8 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<bool>("IsAdvanced")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsGrouped")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ShortDescription")
                         .HasColumnType("text");
 
                     b.Property<string>("Specialization")
@@ -493,15 +490,7 @@ namespace Wfrp.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("MaximumLevel")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TestType")
                         .IsRequired()
                         .HasColumnType("text");
 

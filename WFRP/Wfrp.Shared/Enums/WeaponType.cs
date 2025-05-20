@@ -1,4 +1,4 @@
-﻿namespace Wfrp.Domain.Entities
+﻿namespace Wfrp.Shared.Enums
 {
     public enum WeaponType
     {

@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace Wfrp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCommit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CareerClasses",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -24,26 +25,38 @@ namespace Wfrp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Flaws",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Flaws", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Availability = table.Column<int>(type: "integer", nullable: false),
                     Weight = table.Column<double>(type: "double precision", nullable: false),
-                    Value = table.Column<int>(type: "integer", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: false),
                     ItemType = table.Column<string>(type: "character varying(8)", maxLength: 8, nullable: false),
                     Location = table.Column<string>(type: "text", nullable: true),
                     ArmorPoints = table.Column<int>(type: "integer", nullable: true),
-                    Qualities = table.Column<string>(type: "text", nullable: true),
-                    Flaws = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     IsConsumable = table.Column<bool>(type: "boolean", nullable: true),
                     Effect = table.Column<string>(type: "text", nullable: true),
-                    WeaponType = table.Column<string>(type: "text", nullable: true),
+                    WeaponType = table.Column<int>(type: "integer", nullable: true),
                     Damage = table.Column<string>(type: "text", nullable: true),
-                    Reach = table.Column<string>(type: "text", nullable: true),
-                    Weapon_Qualities = table.Column<string>(type: "text", nullable: true),
-                    Weapon_Flaws = table.Column<string>(type: "text", nullable: true)
+                    Reach = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,10 +64,25 @@ namespace Wfrp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Qualities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Qualities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Races",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     BaseCharacteristics_WeaponSkill = table.Column<int>(type: "integer", nullable: false),
                     BaseCharacteristics_BallisticSkill = table.Column<int>(type: "integer", nullable: false),
@@ -80,8 +108,10 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "Skills",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
                     Characteristic = table.Column<int>(type: "integer", nullable: false),
                     Specialization = table.Column<string>(type: "text", nullable: true),
                     IsAdvanced = table.Column<bool>(type: "boolean", nullable: false)
@@ -95,7 +125,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "Talents",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CanBeRanked = table.Column<bool>(type: "boolean", nullable: false)
@@ -109,9 +140,10 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "Careers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    CareerClassId = table.Column<Guid>(type: "uuid", nullable: false)
+                    CareerClassId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,11 +157,59 @@ namespace Wfrp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ItemFlaws",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(type: "integer", nullable: false),
+                    FlawId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemFlaws", x => new { x.ItemId, x.FlawId });
+                    table.ForeignKey(
+                        name: "FK_ItemFlaws_Flaws_FlawId",
+                        column: x => x.FlawId,
+                        principalTable: "Flaws",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemFlaws_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemQualities",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(type: "integer", nullable: false),
+                    QualityId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemQualities", x => new { x.ItemId, x.QualityId });
+                    table.ForeignKey(
+                        name: "FK_ItemQualities_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemQualities_Qualities_QualityId",
+                        column: x => x.QualityId,
+                        principalTable: "Qualities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RaceSkill",
                 columns: table => new
                 {
-                    RaceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RaceId = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<int>(type: "integer", nullable: false),
                     InitialLevel = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -153,8 +233,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "RaceTalent",
                 columns: table => new
                 {
-                    RaceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TalentId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RaceId = table.Column<int>(type: "integer", nullable: false),
+                    TalentId = table.Column<int>(type: "integer", nullable: false),
                     IsOptional = table.Column<bool>(type: "boolean", nullable: false),
                     DisplayOrder = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -179,10 +259,11 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CareerLevels",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Level = table.Column<int>(type: "integer", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    CareerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CareerId = table.Column<int>(type: "integer", nullable: false),
                     StatusTier = table.Column<int>(type: "integer", nullable: false),
                     StatusLevel = table.Column<int>(type: "integer", nullable: false),
                     CanAdvanceCharacteristics = table.Column<string>(type: "text", nullable: false)
@@ -202,7 +283,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "Characters",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Age = table.Column<int>(type: "integer", nullable: false),
                     Height = table.Column<int>(type: "integer", nullable: false),
@@ -215,7 +297,7 @@ namespace Wfrp.Infrastructure.Migrations
                     ShortTermAmbition = table.Column<string>(type: "text", nullable: false),
                     LongTermAmbition = table.Column<string>(type: "text", nullable: false),
                     Psychology = table.Column<string>(type: "text", nullable: false),
-                    RaceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RaceId = table.Column<int>(type: "integer", nullable: false),
                     InitialCharacteristics_WeaponSkill = table.Column<int>(type: "integer", nullable: false),
                     InitialCharacteristics_BallisticSkill = table.Column<int>(type: "integer", nullable: false),
                     InitialCharacteristics_Strength = table.Column<int>(type: "integer", nullable: false),
@@ -236,7 +318,7 @@ namespace Wfrp.Infrastructure.Migrations
                     AdvancesCharacteristics_Intelligence = table.Column<int>(type: "integer", nullable: false),
                     AdvancesCharacteristics_Willpower = table.Column<int>(type: "integer", nullable: false),
                     AdvancesCharacteristics_Fellowship = table.Column<int>(type: "integer", nullable: false),
-                    CurrentCareerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CurrentCareerId = table.Column<int>(type: "integer", nullable: true),
                     CareerLevel = table.Column<int>(type: "integer", nullable: false),
                     ExperienceTotal = table.Column<int>(type: "integer", nullable: false),
                     ExperienceSpent = table.Column<int>(type: "integer", nullable: false)
@@ -261,8 +343,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CareerLevelSkill",
                 columns: table => new
                 {
-                    CareerLevelId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uuid", nullable: false)
+                    CareerLevelId = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -285,8 +367,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CareerLevelTalent",
                 columns: table => new
                 {
-                    CareerLevelId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TalentId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CareerLevelId = table.Column<int>(type: "integer", nullable: false),
+                    TalentId = table.Column<int>(type: "integer", nullable: false),
                     IsOptional = table.Column<bool>(type: "boolean", nullable: false),
                     DisplayOrder = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -311,8 +393,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CharacterCareer",
                 columns: table => new
                 {
-                    CharacterId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CareerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CharacterId = table.Column<int>(type: "integer", nullable: false),
+                    CareerId = table.Column<int>(type: "integer", nullable: false),
                     Level = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -336,8 +418,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CharacterItem",
                 columns: table => new
                 {
-                    CharacterId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ItemId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CharacterId = table.Column<int>(type: "integer", nullable: false),
+                    ItemId = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     Notes = table.Column<string>(type: "text", nullable: true)
                 },
@@ -362,8 +444,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CharacterSkill",
                 columns: table => new
                 {
-                    CharacterId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CharacterId = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<int>(type: "integer", nullable: false),
                     AcquiredAtLevel = table.Column<int>(type: "integer", nullable: false),
                     XPSpent = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -388,8 +470,8 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CharacterTalent",
                 columns: table => new
                 {
-                    CharacterId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TalentId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CharacterId = table.Column<int>(type: "integer", nullable: false),
+                    TalentId = table.Column<int>(type: "integer", nullable: false),
                     Rank = table.Column<int>(type: "integer", nullable: false),
                     AcquiredAtLevel = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -461,6 +543,16 @@ namespace Wfrp.Infrastructure.Migrations
                 column: "TalentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItemFlaws_FlawId",
+                table: "ItemFlaws",
+                column: "FlawId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemQualities_QualityId",
+                table: "ItemQualities",
+                column: "QualityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RaceSkill_SkillId",
                 table: "RaceSkill",
                 column: "SkillId");
@@ -493,6 +585,12 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CharacterTalent");
 
             migrationBuilder.DropTable(
+                name: "ItemFlaws");
+
+            migrationBuilder.DropTable(
+                name: "ItemQualities");
+
+            migrationBuilder.DropTable(
                 name: "RaceSkill");
 
             migrationBuilder.DropTable(
@@ -502,10 +600,16 @@ namespace Wfrp.Infrastructure.Migrations
                 name: "CareerLevels");
 
             migrationBuilder.DropTable(
+                name: "Characters");
+
+            migrationBuilder.DropTable(
+                name: "Flaws");
+
+            migrationBuilder.DropTable(
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Characters");
+                name: "Qualities");
 
             migrationBuilder.DropTable(
                 name: "Skills");
