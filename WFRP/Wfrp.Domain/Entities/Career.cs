@@ -7,6 +7,8 @@
         public string Summary { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
+        public List<CareerItem>? CareerTrappings { get; set; };
+
         public int CareerClassId { get; set; }
         public CareerClass CareerClass { get; set; }
 

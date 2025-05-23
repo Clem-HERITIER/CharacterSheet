@@ -1,88 +1,139 @@
+-- Skills
 INSERT INTO "Skills" ("Name", "ShortDescription", "Description", "Characteristic", "IsGrouped", "Specialization", "IsAdvanced") VALUES
+('Art', 'Crée des oeuvres avec talent.', 'Créez des oeuvres d’art via différents moyens (peinture, sculpture...). Outils requis, peut nécessiter un test étendu selon l’oeuvre.', 6, true, 'Peinture', false),
+('Athlétisme', 'Compétence physique générale.', 'Capacité à courir, sauter, grimper et effectuer des actions physiques diverses. Utile en déplacement et en combat.', 5, false, null, false),
+('Calme', 'Résiste à la peur et à la pression.', 'Permet de garder son sang-froid face à la peur, la pression ou des tentatives de manipulation. Résiste aux effets psychologiques.', 8, false, null, false),
+('Charme', 'Influence les autres positivement.', 'Utilisé pour convaincre, séduire, mendier ou faire un discours. Peut influencer des foules ou des individus.', 9, false, null, false),
+('Chevaucher', 'Monter des montures.', 'Maîtrise d’un type de monture, utile pour voyager, charger, combattre ou effectuer des acrobaties équestres.', 5, true, 'Cheval', false),
+('Commandement', 'Dirige et motive les autres.', 'Permet de diriger efficacement des subordonnés, d’encourager ou de transférer des avantages pendant le combat.', 9, false, null, false),
+('Conduite d’attelage', 'Conduit véhicules tractés.', 'Permet de conduire des attelages ou véhicules lourds. Des tests sont requis en situation difficile.', 5, false, null, false),
+('Corps à corps', 'Manie des armes de mêlée.', 'Compétence de combat rapproché avec une catégorie d’armes donnée. Spécialisée selon le type d’arme.', 0, true, 'Base', false),
+('Crochetage', 'Ouvre des serrures complexes.', 'Permet d’ouvrir des serrures sans clé. Utilisation d’outils recommandée. Peut être opposée aux protections.', 6, false, null, true),
+('Discrétion', 'Se déplace furtivement.', 'Permet de se cacher, se faufiler ou tendre une embuscade. Opposée à la Perception de la cible.', 5, true, 'Urbaine', false),
+('Divertissement', 'Amuse une audience.', 'Chante, joue, raconte ou amuse. Utile pour gagner de l’attention ou distraire. Influence l’auditoire selon les DR.', 9, true, 'Chant', false),
+('Dressage', 'Entraîne un type d’animal.', 'Comprend et entraîne les animaux. Peut aussi effrayer ou diriger des bêtes en combat. Spécialisation requise.', 7, true, 'Chien', true),
+('Emprise sur les animaux', 'Apaise ou dirige les bêtes.', 'Influence comportement des animaux. Peut calmer ou effrayer. Test opposé à la FM des cibles.', 8, false, null, false),
+('Escalade', 'Grimpe en hauteur.', 'Permet d’escalader des surfaces verticales. Peut être utilisée en combat ou face à des obstacles naturels.', 2, false, null, false),
+('Escamotage', 'Vol ou tour de passe-passe.', 'Pickpocket, triche ou prestidigitation. Opposée à Perception. Peut influencer des jeux de hasard.', 6, false, null, true),
+('Esquive', 'Évite des attaques ou chutes.', 'Permet d’éviter attaques, pièges ou projectiles. Utile en combat et exploration.', 5, false, null, false),
+('Évaluation', 'Estime valeur et authenticité.', 'Évalue objets rares, détecte contrefaçons. Peut demander test opposé au faussaire.', 7, false, null, true),
+('Focalisation', 'Canalise la magie.', 'Contrôle les Vents de Magie. Requiert formation magique. Chaque vent a sa spécialisation.', 8, true, 'Aqshy', true),
+('Guérison', 'Soigne blessures et maladies.', 'Diagnostique, traite maladies ou blessures. Peut guérir, stopper hémorragies ou réduire infections.', 7, false, null, true),
+('Intimidation', 'Fait peur pour imposer sa volonté.', 'Fait fuir ou influence par la peur. Opposée au Calme. Peut servir à éviter le combat.', 2, false, null, false),
+('Intuition', 'Perçoit émotions ou détails.', 'Saisit les intentions ou détecte les mensonges. Donne +1 Avantage sur succès en combat.', 7, false, null, false),
+('Langue', 'Parle et comprend une langue.', 'Maîtrise une langue étrangère. Spécialisée selon le dialecte. Peut être cruciale pour la magie.', 7, true, 'Magick', true),
+('Marchandage', 'Négocie de meilleurs prix.', 'Améliore les échanges commerciaux. Opposée au marchand. Utile dans les marchés ou pour troquer.', 9, false, null, false),
+('Métier', 'Maîtrise d’un artisanat.', 'Savoir-faire lié à une profession (Forgeron, Cuisinier, etc.). Sert à produire ou réparer des objets.', 6, true, 'Forgeron', true),
+('Musicien', 'Joue un instrument.', 'Permet de jouer un instrument pour divertir ou soutenir. Spécialisée selon l’instrument.', 6, true, 'Luth', true),
+('Natation', 'Nage sans danger.', 'Permet de se déplacer dans l’eau. Test requis si danger, équipement lourd ou conditions difficiles.', 2, false, null, true),
+('Orientation', 'Trouve son chemin.', 'Utilisée pour se repérer dans la nature ou avec une carte. Test requis si désorienté ou sans repère.', 7, false, null, false),
+('Pari', 'Évalue risques et chance.', 'Permet de jouer et gagner à des jeux de hasard. Peut être influencé par Escamotage.', 7, false, null, false),
+('Perception', 'Remarque ce qui échappe aux autres.', 'Détecte objets cachés, ennemis, pièges. Opposée à Escamotage ou Discrétion.', 7, false, null, false);
 
--- Art
-('Art', 'Création artistique selon spécialisation', 'Créez des oeuvres d’art avec le moyen d’expression de votre choix. Tests modifiés si outils absents. DR détermine la qualité. Peut nécessiter un Test étendu.', 6, TRUE, 'Cartographie, Gravure, Mosaïque, Peinture, Sculpture, Tatouage, Tissage', FALSE),
-
--- Athlétisme
-('Athlétisme', 'Activité physique générale', 'Permet de courir, sauter, se déplacer rapidement. Influencé par les règles de mouvement.', 5, FALSE, NULL, FALSE),
-
--- Calme
-('Calme', 'Résister à la peur et rester serein', 'Permet de garder son sang-froid sous pression, résister à la peur et à la psychologie.', 8, FALSE, NULL, FALSE),
-
--- Charme
-('Charme', 'Influencer positivement autrui', 'Utilisé pour plaire, persuader ou mendier. Peut s'utiliser en public ou en combat selon le contexte.', 9, FALSE, NULL, FALSE),
-
--- Chevaucher
-('Chevaucher', 'Maîtrise des montures spécifiques', 'Utilisé pour monter et contrôler des animaux montables. Nécessaire pour les actions inhabituelles.', 5, TRUE, 'Cheval, Grand Loup, Griffon, Demigriffon, Pégase', FALSE),
-
--- Commandement
-('Commandement', 'Donner des ordres efficacement', 'Permet de diriger d'autres individus, conférer des Avantages et encourager les alliés.', 9, FALSE, NULL, FALSE),
-
--- Conduite d’attelage
-('Conduite d’attelage', 'Contrôle de véhicules attelés', 'Permet de conduire chariots et diligences. Les tests dépendent de l'état de la route et de la météo.', 5, FALSE, NULL, FALSE),
-
--- Corps à corps
-('Corps à corps', 'Maîtrise des armes de mêlée', 'Utilisé pour le combat rapproché selon une spécialisation. Pénalités si mauvaise spécialisation.', 0, TRUE, 'Arme d’hast, Arme à deux mains, Bagarre, Base, Cavalerie, Escrime, Fléau, Parade', FALSE),
-
--- Crochetage
-('Crochetage', 'Ouvrir serrures sans clefs', 'Utilisé pour forcer des mécanismes de verrouillage. Les outils inappropriés imposent un malus.', 6, FALSE, NULL, TRUE),
-
--- Discrétion
-('Discrétion', 'Se cacher et se faufiler', 'Permet de se mouvoir sans être détecté, souvent opposée à Perception.', 5, TRUE, 'Rurale, Souterrains, Urbaine', FALSE),
-
--- Divertissement
-('Divertissement', 'Captiver un public par une performance', 'Permet d'amuser ou de captiver les foules. Utilisable selon la spécialisation choisie.', 9, TRUE, 'Chant, Comédie, Interprétation, Narration', FALSE),
-
--- Dressage
-('Dressage', 'Entraînement d'animaux spécifiques', 'Permet d'entraîner des animaux. Peut provoquer la peur chez une bête ciblée en combat.', 7, TRUE, 'Cheval, Chien, Demigriffon, Pégase, Pigeon', TRUE),
-
--- Emprise sur les animaux
-('Emprise sur les animaux', 'Calmer ou dominer les animaux', 'Influence comportement des animaux. Peut les empêcher d’attaquer pendant un round.', 8, FALSE, NULL, FALSE),
-
--- Escalade
-('Escalade', 'Grimper sur des surfaces', 'Permet d'escalader en sécurité. Requiert des tests si la surface est difficile ou en combat.', 2, FALSE, NULL, FALSE),
-
--- Escamotage
-('Escamotage', 'Vol discret et tours de passe-passe', 'Permet de faire les poches ou de tricher. Peut être utilisé avec Pari.', 6, FALSE, NULL, TRUE),
-
--- Esquive
-('Esquive', 'Éviter des attaques ou dangers', 'Utilisée pour éviter les attaques en combat ou obstacles imprévus.', 5, FALSE, NULL, FALSE),
-
--- Évaluation
-('Évaluation', 'Déterminer la valeur d'objets', 'Permet d'estimer la valeur d'objets rares ou falsifiés.', 7, FALSE, NULL, TRUE),
-
--- Focalisation
-('Focalisation', 'Contrôle des Vents de Magie', 'Permet de canaliser les Vents de Magie. Essentielle pour les lanceurs de sorts.', 8, TRUE, 'Aqshy, Azyr, Chamon, Dhar, Ghur, Ghyran, Hysh, Shyish, Ulgu', TRUE),
-
--- Guérison
-('Guérison', 'Soigner blessures et maladies', 'Permet de traiter maladies, blessures et infections.', 7, FALSE, NULL, TRUE),
-
--- Intimidation
-('Intimidation', 'Contraindre par la peur', 'Permet de forcer une créature à se soumettre ou fuir.', 2, FALSE, NULL, FALSE),
-
--- Intuition
-('Intuition', 'Percevoir ce qui est implicite', 'Permet de remarquer les mensonges ou les dangers potentiels.', 7, FALSE, NULL, FALSE),
-
--- Langue
-('Langue', 'Comprendre et parler d'autres langues', 'Permet de communiquer dans une langue donnée. Utilisé pour concepts complexes.', 7, TRUE, 'bataille, bretonnien, classique, guilde, khazalid, Magick, voleur, tiléen', TRUE),
-
--- Marchandage
-('Marchandage', 'Négocier de meilleures offres', 'Utilisé pour obtenir de bons prix ou déceler les arnaques.', 9, FALSE, NULL, FALSE),
-
--- Métier
-('Métier', 'Exercer un métier ou artisanat', 'Permet de fabriquer des objets ou rendre des services professionnels.', 6, TRUE, 'Apothicaire, Calligraphe, Cirier, Charpentier, Cuisinier, Embaumeur, Forgeron, Tanneur', TRUE),
-
--- Musicien
-('Musicien', 'Jouer d'un instrument', 'Permet de divertir avec un instrument de musique.', 6, TRUE, 'Clavecin, Cor, Cornemuse, Luth, Violon', TRUE),
-
--- Natation
-('Natation', 'Nager sans se noyer', 'Permet de nager efficacement. Utile en combat aquatique.', 2, FALSE, NULL, TRUE),
-
--- Orientation
-('Orientation', 'Trouver son chemin', 'Permet de se repérer dans la nature ou avec une carte.', 7, FALSE, NULL, FALSE),
-
--- Pari
-('Pari', 'Évaluer les chances de gains', 'Utilisé pour jeux de hasard ou spéculations.', 7, FALSE, NULL, FALSE),
-
--- Perception
-('Perception', 'Détecter les choses par les sens', 'Permet d'observer et repérer des dangers ou anomalies.', 7, FALSE, NULL, FALSE);
+INSERT INTO "SkillSpecializations" ("Name", "SkillId") VALUES
+  ("Cartographie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')),
+  ("Gravure", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')),
+  ("Mosaïque", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')),
+  ("Peinture", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')),
+  ("Sculpture", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')), 
+  ("Tatouage", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')), 
+  ("Tissage", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Art')), 
+  ("Cheval", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Chevaucher')),
+  ("Grand Loup", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Chevaucher')),
+  ("Griffon", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Chevaucher')),
+  ("Demigriffon", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Chevaucher')),
+  ("Pégase", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Chevaucher')),
+  ("Arme à deux mains", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),
+  ("Bagarre", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),
+  ("Base", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),
+  ("Cavalerie,", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),
+  ("Escrime", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),     
+  ("Fléau", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),     
+  ("Parade.", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Corps à corps')),     
+  ("Rurale", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Discrétion')),
+  ("Souterrains", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Discrétion')),
+  ("Urbaine", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Discrétion')),    
+  ("Chant", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Divertissement')),
+  ("Comédie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Divertissement')),
+  ("Interprétation", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Divertissement')),
+  ("Narration", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Divertissement')),
+  ("Cheval", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Dressage')),
+  ("Chien", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Dressage')),
+  ("Demigriffon", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Dressage')),
+  ("Pégase", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Dressage')),
+  ("Pigeon", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Dressage')),
+  ("Aqshy", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Azyr", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Chamon", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Dhar", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Ghur", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Ghyran", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Hysh", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Shyish", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Ulgu", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Focalisation')),
+  ("Bataille", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Bretonnien", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Classique", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Guilde", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Khazalid", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Magick", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Voleur", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Tiléen", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Albionais", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),    
+  ("Elthárin", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Estalien", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Gospodarin", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Grumbarth", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Halfling", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Norse", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Reikspiel", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')), 
+  ("Queekique", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Wastelander", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Langue')),
+  ("Apothicaire", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Calligraphe", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Cirier", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Charpentier", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Cuisinier", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Embaumeur", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Forgeron", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Tanneur", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Métier')),
+  ("Clavecin", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Musicien')),
+  ("Cor", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Musicien')),
+  ("Cornemuse", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Musicien')),
+  ("Luth", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Musicien')),
+  ("Violon", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Musicien')),
+  ("Arbalète", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Arc", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Entraves", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Explosifs", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Fronde", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Ingénierie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Lancer", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Poudre noire", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Projectiles')),
+  ("Acrobaties", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Cracheur de feu", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Danser", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Funambule", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Jonglage", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Mime", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Pitreries", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Représentation')),
+  ("Géologie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Héraldique", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Histoire", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Ingénierie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Loi", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Magick", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Métallurgie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Science", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Théologie", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Savoir')),
+  ("Ordre Gris", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Signes secrets')),
+  ("Guildes", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Signes secrets')),
+  ("Ruraux", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Signes secrets')),
+  ("Éclaireurs", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Signes secrets')),
+  ("Voleurs", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Signes secrets')),
+  ("Vagabonds", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Signes secrets')),
+  ("Caravelle", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Voile')),
+  ("Chaland", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Voile')),
+  ("Cogue", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Voile')),
+  ("Drakkar", (SELECT "Id" FROM "Skills" WHERE "Name" = 'Voile')),
+  ("Frégate", (SELECT "Id" FROM "Skills" WHERE "Name" = ''));

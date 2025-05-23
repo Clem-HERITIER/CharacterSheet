@@ -11,7 +11,7 @@
         public CharacteristicType Characteristic { get; set; }
 
         public bool IsGrouped { get; set; } = false;
-        public string? Specialization { get; set; }
+        public List<SkillSpecialization>? Specializations { get; set; }
 
         public bool IsAdvanced { get; set; } = false;
     }
