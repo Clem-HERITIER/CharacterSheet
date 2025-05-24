@@ -6,7 +6,7 @@
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        public List<CareerClassItem>? ClassTrapping { get; set; };
+        public List<CareerClassItem>? ClassTrapping { get; set; }
 
         public List<Career> Careers { get; set; } = new();
     }

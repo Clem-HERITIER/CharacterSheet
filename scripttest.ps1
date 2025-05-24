@@ -1,8 +1,8 @@
 # Chemin du fichier source à lire
-$sourcePath = "C:\Users\cleme\source\repos\CharacterSheet\Input.txt"
+$sourcePath = "Input.txt"
 
 # Chemin du fichier de sortie
-$outputPath = "C:\Users\cleme\source\repos\CharacterSheet\Result.txt"
+$outputPath = "Result.txt"
 
 # Lecture du fichier en texte brut
 $content = Get-Content -Raw -Path $sourcePath

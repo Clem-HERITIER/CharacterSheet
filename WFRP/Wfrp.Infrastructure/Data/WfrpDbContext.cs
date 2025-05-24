@@ -12,6 +12,7 @@ namespace Wfrp.Infrastructure.Data
         public DbSet<Character> Characters => Set<Character>();
         public DbSet<Race> Races => Set<Race>();
         public DbSet<Skill> Skills => Set<Skill>();
+        public DbSet<SkillSpecialization> SkillSpecializations { get; set; }
         public DbSet<Talent> Talents => Set<Talent>();
         public DbSet<Career> Careers => Set<Career>();
         public DbSet<CareerClass> CareerClasses => Set<CareerClass>();
@@ -89,6 +90,13 @@ namespace Wfrp.Infrastructure.Data
                 .HasOne(itemFlow => itemFlow.Flaw)
                 .WithMany()
                 .HasForeignKey(itemFlow => itemFlow.FlawId);
+
+            // SkillSpecialization configuration
+            modelBuilder.Entity<Skill>()
+                .HasMany(s => s.Specializations)
+                .WithOne(sp => sp.Skill)
+                .HasForeignKey(sp => sp.SkillId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
